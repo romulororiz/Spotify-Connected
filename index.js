@@ -77,14 +77,16 @@ app.get('/callback', (req, res) => {
 					access_token: access_token,
 					refresh_token: refresh_token,
 					expires_in: expires_in,
-				});
+				}).toString();
 
 				// redirect to react app
 				// pass along tokens in query params
 				res.redirect(`http://localhost:3000?${queryParams}`);
 			} else {
 				res.redirect(
-					`/?${new UrlSearchParams({ error: 'Invalid Token Value' })}`
+					`/?${new UrlSearchParams({
+						error: 'invalid_token',
+					}).toString()}`
 				);
 			}
 		})
@@ -102,7 +104,7 @@ app.get('/refresh_token', (req, res) => {
 		data: new URLSearchParams({
 			grant_type: 'refresh_token',
 			refresh_token: refresh_token,
-		}),
+		}).toString(),
 		headers: {
 			'content-type': 'application/x-www-form-urlencoded',
 			Authorization: `Basic ${new Buffer.from(
