@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
-import { getCurrentUserPlaylists, getCurrentUserProfile } from '../spotify';
+import {
+	getCurrentUserPlaylists,
+	getCurrentUserProfile,
+	getTopArtists,
+} from '../spotify';
 import { StyledHeader } from '../styles';
 
 const Profile = () => {
 	const [profile, setProfile] = useState(null);
 	const [playlists, setPlaylists] = useState(null);
-
-	console.log(playlists);
+	const [topArtists, setTopArtists] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -16,6 +19,11 @@ const Profile = () => {
 
 			const userPlaylist = await getCurrentUserPlaylists();
 			setPlaylists(userPlaylist.data);
+
+			const userTopArtists = await getTopArtists();
+			setTopArtists(userTopArtists.data);
+
+			console.log(userTopArtists.data);
 		};
 
 		// High-order Function to catch errors
