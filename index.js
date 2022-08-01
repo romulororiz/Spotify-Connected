@@ -8,15 +8,6 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-app.get('/', (req, res) => {
-	const data = {
-		name: 'Romulo',
-		isAwesome: true,
-	};
-
-	res.json(data);
-});
-
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -38,7 +29,9 @@ app.get('/login', (req, res) => {
 	const state = generateRandomString(16);
 	res.cookie(stateKey, state);
 
-	const scope = ['user-read-private', 'user-read-email', 'user-top-read'].join(' ');
+	const scope = ['user-read-private', 'user-read-email', 'user-top-read'].join(
+		' '
+	);
 
 	const searchParams = new URLSearchParams({
 		client_id: CLIENT_ID,

@@ -7,7 +7,12 @@ import {
 	getTopTracks,
 } from '../spotify';
 import { StyledHeader } from '../styles';
-import { ArtistsGrid, SectionWrapper, TrackList } from '../components';
+import {
+	ArtistsGrid,
+	PlaylistsGrid,
+	SectionWrapper,
+	TrackList,
+} from '../components';
 
 const Profile = () => {
 	const [profile, setProfile] = useState(null);
@@ -28,8 +33,6 @@ const Profile = () => {
 
 			const userTopTracks = await getTopTracks();
 			setTopTracks(userTopTracks.data);
-
-			console.log(userTopTracks.data);
 		};
 
 		// High-order Function to catch errors
@@ -47,7 +50,7 @@ const Profile = () => {
 							src={
 								profile.images.length && profile.images[0].url
 									? profile.images[0].url
-									: '/images/avatar.svg'
+									: '/images/avatar.png'
 							}
 							alt='Avatar'
 						/>
@@ -73,7 +76,7 @@ const Profile = () => {
 				</StyledHeader>
 			)}
 
-			{topArtists && (
+			{topArtists && topTracks && playlists && (
 				<main>
 					<SectionWrapper
 						title='Top Artists This Month'
@@ -81,13 +84,16 @@ const Profile = () => {
 					>
 						<ArtistsGrid artists={topArtists.items.slice(0, 10)} />
 					</SectionWrapper>
-				</main>
-			)}
 
-			{topTracks && (
-				<main>
-					<SectionWrapper title='Top Tracks' seeAllLink='/top-tracks'>
-						<TrackList tracks={topTracks.items.slice(0, 5)} />
+					<SectionWrapper
+						title='Top Tracks This Month'
+						seeAllLink='/top-tracks'
+					>
+						<TrackList tracks={topTracks.items.slice(0, 10)} />
+					</SectionWrapper>
+
+					<SectionWrapper title='Playlists' seeAllLink='/playlists'>
+						<PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
 					</SectionWrapper>
 				</main>
 			)}

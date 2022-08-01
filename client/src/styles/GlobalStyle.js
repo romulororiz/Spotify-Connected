@@ -77,6 +77,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     max-width: 100%;
     vertical-align: middle;
+    object-fit: contain;
   }
 
   main {
