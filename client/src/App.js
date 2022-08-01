@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { accessToken, logout } from './spotify';
 import { GlobalStyle } from './styles';
-import { Login, Profile, TopArtists, TopTracks } from './pages';
+import { Login, Playlists, Profile, TopArtists, TopTracks } from './pages';
 import styled from 'styled-components';
 
 const StyledLogoutButton = styled.button`
@@ -62,7 +62,7 @@ function App() {
 									path='/playlists/:id'
 									element={<h1>Playlist</h1>}
 								></Route>
-								<Route path='/playlists' element={<h1>Playlists</h1>}></Route>
+								<Route path='/playlists' element={<Playlists />}></Route>
 								<Route path='/' element={<Profile />} />
 							</Routes>
 						</Router>
