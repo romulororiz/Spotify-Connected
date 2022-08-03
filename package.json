@@ -3,11 +3,20 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"engines": {
+		"node": "16.15.1"
+	},
+	"cacheDirectory": [
+		"node_modules",
+		"client/node_modules"
+	],
 	"scripts": {
 		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
 		"server": "nodemon index.js",
 		"client": "cd client && npm start",
-		"postinstall": "cd client && npm i"
+		"postinstall": "cd client && npm i",
+		"build": "NODE_ENV=production cd client/ && npm install && npm run build",
+		"start-server": "node index.js"
 	},
 	"keywords": [],
 	"author": "",
