@@ -9,6 +9,7 @@ import {
 import { StyledHeader } from '../styles';
 import {
 	ArtistsGrid,
+	Loader,
 	PlaylistsGrid,
 	SectionWrapper,
 	TrackList,
