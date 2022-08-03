@@ -16,7 +16,6 @@ import {
 	TopTracks,
 } from './pages';
 import styled from 'styled-components';
-import { Loader } from './components';
 
 const StyledLogoutButton = styled.button`
 	position: absolute;

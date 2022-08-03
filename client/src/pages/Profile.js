@@ -77,7 +77,7 @@ const Profile = () => {
 				</StyledHeader>
 			)}
 
-			{topArtists && topTracks && playlists && (
+			{topArtists && topTracks && playlists ? (
 				<main>
 					<SectionWrapper
 						title='Top Artists This Month'
@@ -97,6 +97,8 @@ const Profile = () => {
 						<PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
 					</SectionWrapper>
 				</main>
+			) : (
+				<Loader />
 			)}
 		</>
 	);

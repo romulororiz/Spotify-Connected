@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCurrentUserPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
-import { SectionWrapper, PlaylistsGrid } from '../components';
+import { SectionWrapper, PlaylistsGrid, Loader } from '../components';
 
 const Playlists = () => {
 	const [playlistsData, setPlaylistsData] = useState(null);
@@ -36,10 +36,10 @@ const Playlists = () => {
 		// Use functional update to update playlists state variable
 		// to avoid including playlists as a dependency for this hook
 		// and creating an infinite loop
-		setPlaylists(playlists => ([
-			...playlists ? playlists : [],
+		setPlaylists(playlists => [
+			...(playlists ? playlists : []),
 			...playlistsData.items,
-		]));
+		]);
 
 		// Fetch next set of playlists as needed
 		catchErrors(fetchMoreData());
@@ -47,8 +47,8 @@ const Playlists = () => {
 
 	return (
 		<main>
-			<SectionWrapper title='Public Playlists' breadcrumb={true}>
-				{playlists && <PlaylistsGrid playlists={playlists} />}
+			<SectionWrapper title='Playlists' breadcrumb={true}>
+				{playlists ? <PlaylistsGrid playlists={playlists} /> : <Loader />}
 			</SectionWrapper>
 		</main>
 	);
